@@ -1,0 +1,250 @@
+
+############################################################################
+# Power10k
+############################################################################
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+############################################################################
+# ZSH
+############################################################################
+
+plugins=(
+  git
+  zsh-autosuggestions
+  poetry
+  zsh-syntax-highlighting
+)
+
+source /home/rjouhameau/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/rjouhameau/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/rjouhameau/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/rjouhameau/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export ZSH="/home/rjouhameau/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+
+############################################################################
+# Paths
+############################################################################
+
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+
+############################################################################
+# Brew
+############################################################################
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="/usr/bin/pkg-config /home/linuxbrew/.linuxbrew/bin/pkg-config:$PATH"
+
+
+############################################################################
+# Go
+############################################################################
+
+export PATH=$PATH:/usr/local/go/bin
+
+
+############################################################################
+# Gitlab
+############################################################################
+
+export GITLAB_HOST=https://gitlab.icebergdatalab.com/
+
+
+############################################################################
+# JS / NPM 
+############################################################################
+
+export PATH=$HOME/.npm-global/bin:$PATH
+
+# pnpm
+export PNPM_HOME="/home/rjouhameau/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+
+# bun
+
+# completions
+[ -s "/home/rjouhameau/.bun/_bun" ] && source "/home/rjouhameau/.bun/_bun"
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+eval "$(atuin init zsh)"
+
+
+############################################################################
+# Python packages
+############################################################################
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+# Python Repl config
+export PYTHONSTARTUP=~/.pythonstartup
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/rjouhameau/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/rjouhameau/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/rjouhameau/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/rjouhameau/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+############################################################################
+# Java
+############################################################################
+
+export M2_HOME=/opt/apache-maven-3.9.6
+export PATH=$PATH:$M2_HOME/bin
+
+
+############################################################################
+# Kubernetes
+############################################################################
+
+# Kubernetes Config files (when adding a config file to "~/.kube/", add it there too)
+export KUBECONFIG=~/.kube/config:~/.kube/kubeconfig.yml:~/.kube/kubeconfig_core.yml
+
+
+############################################################################
+# GCP
+############################################################################
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/rjouhameau/Documents/Python/chat/google-cloud-sdk/path.zsh.inc' ]; then . '/home/rjouhameau/Documents/Python/chat/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/rjouhameau/Documents/Python/chat/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/rjouhameau/Documents/Python/chat/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+############################################################################
+# Functions
+############################################################################
+
+docker_rm() {
+  docker stop $1 && docker rm $1
+}
+
+git_add_reset_fzf() {
+  git status -s | 
+    fzf -m \
+        --preview 'bat --color=always --line-range :500 {2}' \
+        --bind "ctrl-a:execute(git add {2})+reload(git status -s)" \
+        --bind "ctrl-r:execute(git reset {2})+reload(git status -s)" \
+        --header "Press ALT-A to add, ALT-R to reset"
+}
+
+interactive_word_finder() {
+  rg \
+      $1 \
+      -i \
+      --line-number \
+      --color=always \
+      --field-match-separator ' ' |
+      fzf \
+          --ansi \
+          --preview 'bat --highlight-line {2} --color=always {1}' \
+          --preview-window '+{2}-5' |
+      awk -F ' ' '{ print $1 ":" $2 }' |
+      xargs --no-run-if-empty code -g
+}
+
+git_checkout_fzf() {
+  git branch \
+  --color=always \
+  --sort=-committerdate \
+  --format='%(color:blue)%(committerdate:relative) %(color:yellow)%(refname:short) %(color:black)%(authorname)' | 
+  fzf \
+    --ansi \
+    --preview 'git log {4} --oneline --graph --date=short --color=always' \
+    --header Checkout |
+    awk -F " " '{print $4}' |
+    xargs git checkout
+}
+
+############################################################################
+# Aliases
+############################################################################
+
+alias c="clear"
+alias dps="docker ps"
+alias dc="docker compose"
+alias dcu="docker compose up"
+alias dcd="docker compose down"
+alias drm="docker_rm"
+alias fw="interactive_word_finder"
+alias ls="exa"
+alias ll="exa --long --header --git --icons"
+alias tree="ll --tree --level=2 -I=.git-ignore"
+alias ldir="ls -al | grep ^d"
+alias ll="ls -al"
+alias lly="ls -al | yank"
+alias sinstall="sudo apt-get install"
+alias richn="rich -n -g --theme=dracula"
+alias tldrf="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"
+alias history="history | fzf --reverse"
+alias gg="git --no-pager log --oneline --decorate --all --graph -35"
+alias gc="git commit -m"
+alias gb="git_checkout_fzf"
+# alias gb="git branch --sort=-committerdate | fzf --header Checkout | xargs git checkout"
+alias gs="git_add_reset_fzf"
+alias hack="interactive_word_finder 'hack'"
+alias lg="lazygit"
+alias pystart="python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt && pip install --upgrade pip"
+alias cc="chat-gpt chat --model-name gpt-4"
+alias dud="du -d 1 -h" # dis usage
+alias k="kubectl"
+alias kc="vl ~/.config/kitty/kitty.conf"
+alias tms="tmux new -s"
+alias tma="tmux a -t"
+alias tmd="tmux detach"
+alias tmk="tmux kill-session -t"
+alias todo="interactive_word_finder 'todo'"
+alias v="nvim"
+alias vl="NVIM_APPNAME=nvim-lazy nvim"
+alias vk="NVIM_APPNAME=nvim-kickstart nvim"
+alias vlc="vl ~/.config/nvim-lazy"
+alias vkc="vl ~/.config/nvim-kickstart"
+alias zshrc="vl ~/.zshrc"
+alias zshrcs="source ~/.zshrc"
+
+
+
+############################################################################
+# API Keys
+############################################################################
+
+
