@@ -136,6 +136,8 @@ export PATH=$PATH:$M2_HOME/bin
 # Kubernetes Config files (when adding a config file to "~/.kube/", add it there too)
 export KUBECONFIG=~/.kube/config:~/.kube/kubeconfig.yml:~/.kube/kubeconfig_core.yml
 
+source <(kubectl completion zsh)
+
 
 ############################################################################
 # GCP
