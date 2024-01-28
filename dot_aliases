@@ -1,0 +1,118 @@
+
+############################################################################
+# CLI
+############################################################################
+
+alias c="clear"
+alias cc="chat-gpt chat"
+alias ccm="chat-gpt chat --markdown"
+alias cy="chat-gpt youtube"
+alias fw="interactive_word_finder"
+alias hack="interactive_word_finder 'hack'"
+alias todo="interactive_word_finder 'todo'"
+alias tldrf="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"
+alias si="sudo apt-get install"
+
+alias ls="exa"
+alias ll="exa --long --header --git --icons"
+alias ldir="ls -al | grep ^d"
+alias ll="ls -al"
+alias tree="ll --tree --level=2 -I=.git-ignore"
+
+alias dud="du -d 1 -h" # dis usage
+
+alias zshrc="v ~/.zshrc"
+alias zshrcs="source ~/.zshrc"
+
+alias {gz,tgz,zip,lzh,bz1,tbz,Z,tar,arj,xz}=extract
+
+
+############################################################################
+# Docker
+############################################################################
+
+alias dps="docker ps"
+alias dc="docker compose"
+alias dcu="docker compose up"
+alias dcd="docker compose down"
+alias dcl="docker compose logs"
+alias dex="docker exec -it"
+alias drm="docker_rm"
+
+
+############################################################################
+# Kubernetes
+############################################################################
+
+alias k="kubectl"
+alias kx="kubectx"
+alias kn="kubens"
+alias kex="k exec -it"
+alias kl="stern . -n"
+
+alias h="helm"
+alias hi="helm install"
+alias hu="helm uninstall"
+alias hup="helm upgrade"
+alias hls="helm ls"
+alias hlsd="helm ls --all --date"
+alias hse="helm search"
+
+
+############################################################################
+# Git
+############################################################################
+
+alias g="git"
+alias ga="git add"
+alias gam="git add --all"
+alias gb="git_checkout_fzf"
+alias gbd="git branch --delete"
+alias gg="git --no-pager log --oneline --decorate --all --graph -35"
+alias gc="git commit -m"
+alias gca="git commit --verbose --amend"
+alias gcan='git commit --amend --no-edit'
+alias gcam='git commit --all --message'
+alias gco="git checkout"
+alias gl='git pull'
+alias glr='git pull --rebase'
+alias gs="git_add_reset_fzf"
+alias glg='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --date=short'
+alias gm='git merge'
+alias gma='git merge --abort'
+alias gr="git rebase"
+alias grc='git rebase --continue'
+alias gra='git rebase --abort'
+alias gpod='git push origin --delete'
+alias gpr="git remote prune origin"
+alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias grs="git restore --staged"
+alias gu="git reset --soft HEAD~1"
+
+alias lg="lazygit"
+
+
+############################################################################
+# Python
+############################################################################
+
+alias pystart="python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt && pip install --upgrade pip"
+
+
+############################################################################
+# Vim / Neovim
+############################################################################
+
+alias v="NVIM_APPNAME=nvim-lazy nvim"
+alias vc="v ~/.config/nvim-lazy"
+alias vk="NVIM_APPNAME=nvim-kickstart nvim"
+alias vkc="v ~/.config/nvim-kickstart"
+
+############################################################################
+# Tmux
+############################################################################
+
+alias tms="tmux new -s"
+alias tma="tmux a -t"
+alias tmd="tmux detach"
+alias tmk="tmux kill-session -t"
