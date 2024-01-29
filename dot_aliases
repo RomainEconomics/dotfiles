@@ -91,6 +91,7 @@ alias gca="git commit --verbose --amend"
 alias gcan='git commit --amend --no-edit'
 alias gcam='git commit --all --message'
 alias gco="git checkout"
+alias gcb='git checkout -b'
 alias gcm='git checkout $(git_main_branch)'
 alias gl='git pull'
 alias glr='git pull --rebase'
