@@ -100,8 +100,9 @@ alias glg='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgree
 alias gm='git merge'
 alias gma='git merge --abort'
 alias gr="git rebase"
-alias grc='git rebase --continue'
 alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gri='git rebase --interactive'
 alias gp='git push'
 alias gpod='git push origin --delete'
 alias gpr="git remote prune origin"
