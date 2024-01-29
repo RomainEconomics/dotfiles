@@ -102,6 +102,7 @@ alias gma='git merge --abort'
 alias gr="git rebase"
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
+alias gp='git push'
 alias gpod='git push origin --delete'
 alias gpr="git remote prune origin"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
