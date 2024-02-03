@@ -9,23 +9,14 @@
 
 import os
 import subprocess
+from pathlib import Path
 from libqtile import hook, qtile, bar, layout, widget
 from libqtile.core.manager import Qtile
-# from libqtile.dgroups import simple_key_binder
 from libqtile.config import Click, Drag, Group, Key, Match, Screen 
 from libqtile.lazy import lazy
-from pathlib import Path
 
 from qtile_extras.widget.decorations import PowerLineDecoration
-
-
 from libqtile import hook
-from libqtile.utils import send_notification
-
-# @hook.subscribe.focus_change
-# def focus_changed():
-#     send_notification("qtile", "Focus changed.")
-
 
 # --------------------------------------------------------
 # Your configuration
@@ -74,9 +65,6 @@ terminal = "alacritty"
 # --------------------------------------------------------
 
 mod = "mod4" # SUPER KEY
-
-
-from libqtile.widget.backlight import ChangeDirection
 
 
 keys = [
@@ -162,12 +150,6 @@ keys = [
 # --------------------------------------------------------
 
 
-groups = [
-    Group("a", layout='monadtall', screen_affinity=0),
-    Group("z", layout='monadtall', screen_affinity=1),
-    Group('e', layout='monadtall', screen_affinity=1),# matches=[Match(wm_class="brave")]),
-]
-
 def go_to_group(name: str):
     def _inner(qtile: Qtile) -> None:
         if len(qtile.screens) == 1:
@@ -183,9 +165,25 @@ def go_to_group(name: str):
 
     return _inner
 
+
+keybindings = [
+    "ampersand",
+    "eacute",
+    "quotedbl",
+    "apostrophe",
+    "parenleft",
+]
+
+groups = [
+    (str(name), {"label": str(label), "layout": "monadtall"})
+    for label, name in enumerate(keybindings, start=1)
+]
+
+groups = [Group(name=name, **kwargs) for name, kwargs in groups]
+
 for group in groups:
-    keys.append(Key([mod], group.name, lazy.function(go_to_group(group.name))))
-    # keys.append(Key(["mod4"], group.name, lazy.group[group.name].toscreen()))
+    # keys.append(Key([mod], group.name, lazy.function(go_to_group(group.name))))
+    keys.append(Key([mod], group.name, lazy.group[group.name].toscreen()))
     keys.append(Key([mod, "shift"], group.name, lazy.window.togroup(group.name)))
 
 
@@ -411,6 +409,8 @@ floating_layout = layout.Floating(
 # General Setup
 # --------------------------------------------------------
 
+dgroups_key_binder = None
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
