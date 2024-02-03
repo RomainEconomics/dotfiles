@@ -46,7 +46,9 @@ bindings = [
   { key = ")",      mods = "Control",    action = "ResetFontSize"},
   { key = "Escape", mods = "Control",    action = "ToggleViMode"   },
   { key = "I",      mode = "Vi|~Search", action = "ToggleViMode"   },
-  { key = "C",      mods = "Control|Shift", action = "ReceiveChar" }
+  { key = "C",      mods = "Control|Shift", action = "ReceiveChar" },
+  { key= "Back",    mods= "Control",     chars= "\u001b\u007f" } # Delete word
+
 ]
 
 
