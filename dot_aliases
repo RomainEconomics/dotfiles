@@ -4,6 +4,7 @@
 ############################################################################
 
 alias c="clear"
+alias cm="code ~/.local/share/chezmoi"
 alias cc="chat-gpt chat"
 alias ccm="chat-gpt chat --markdown"
 alias cy="chat-gpt youtube"
