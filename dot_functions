@@ -59,7 +59,7 @@ extract() {
 }
 
 
-ch() {
+cheat_sheet() {
     folder=~/Documents/repos/cheat-sheet/cheat_sheet/
 
     pushd $folder > /dev/null && \ 

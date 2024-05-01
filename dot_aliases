@@ -3,16 +3,25 @@
 # CLI
 ############################################################################
 
+# create or attach to existing tmux session
+function sesh_connect() {
+  sesh connect $(sesh list | fzf)
+}
+
 alias c="clear"
+alias ch="cheat_sheet"
+alias ca="chezmoi apply"
 alias cm="code ~/.local/share/chezmoi"
 alias cc="chat-gpt chat"
 alias ccm="chat-gpt chat --markdown"
 alias cy="chat-gpt youtube"
+alias e="exit"
 alias fw="interactive_word_finder"
 alias hack="interactive_word_finder 'hack'"
 alias todo="interactive_word_finder 'todo'"
 alias tldrf="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"
 alias si="sudo apt-get install"
+alias s=sesh_connect
 
 alias ls="exa"
 alias ll="exa --long --header --git --icons"
@@ -109,6 +118,7 @@ alias gp='git push'
 alias gpod='git push origin --delete'
 alias gpr="git remote prune origin"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias grh='git revert HEAD'
 alias grs="git restore --staged"
 alias gu="git reset --soft HEAD~1"
 
@@ -126,16 +136,23 @@ alias pystart="python3 -m venv venv && source venv/bin/activate && pip install -
 # Vim / Neovim
 ############################################################################
 
-alias v="NVIM_APPNAME=nvim-lazy nvim"
-alias vc="v ~/.config/nvim-lazy"
-alias vk="NVIM_APPNAME=nvim-kickstart nvim"
-alias vkc="v ~/.config/nvim-kickstart"
+alias nvim="NVIM_APPNAME=nvim-lazy nvim"
+alias v="nvim"
+alias vim="v"
+# alias vc="v ~/.config/nvim-kickstart"
+# alias lazyc="v ~/.config/nvim-lazy"
 
 ############################################################################
 # Tmux
 ############################################################################
 
-alias tms="tmux new -s"
+# Create a function instead of an aliase, because otherwise, $PWD will be evaluated only when the terminal launch, and hence, it will not consider directory changes
+
+tn() {
+  tmux new -A -s "$(basename $PWD)"
+}
+
+alias tmls="tmux ls"
 alias tma="tmux a -t"
 alias tmd="tmux detach"
 alias tmk="tmux kill-session -t"
