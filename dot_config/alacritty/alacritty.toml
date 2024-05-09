@@ -1,7 +1,5 @@
 
-import = [
-    "~/.config/alacritty/themes/themes/ayu_dark.toml"
-]
+import = ["~/.config/alacritty/themes/themes/ayu_dark.toml"]
 
 [shell]
 program = "/usr/bin/zsh"
@@ -9,11 +7,11 @@ args = ["--login"]
 
 [window]
 dynamic_padding = true
-startup_mode = "Windowed" # Maximized is buggy at the moment, test again later
+startup_mode = "Windowed"                                 # Maximized is buggy at the moment, test again later
 opacity = 1
 decorations = "None"
 padding = { x = 3, y = 3 }
-class = { instance = "Alacritty", general = "Alacritty" } 
+class = { instance = "Alacritty", general = "Alacritty" }
 
 
 [scrolling]
@@ -30,25 +28,23 @@ save_to_clipboard = true
 
 [keyboard]
 bindings = [
-  { key = "(",      mods = "Control",    action = "ReceiveChar"},
-  { key = "H",      mods = "Control",    action = "ReceiveChar"},
-  { key = "J",      mods = "Control",    action = "ReceiveChar"},
-  { key = "K",      mods = "Control",    action = "ReceiveChar"},
-  { key = "L",      mods = "Control",    action = "ReceiveChar"},
-  { key = "M",      mods = "Control",    action = "ReceiveChar"},
-  { key = "V",      mods = "Control",    action = "Paste"},
-  { key = "C",      mods = "Control",    action = "Copy"},
-  { key = "W",	    mods = "Control",    action = "Quit"},
-  { key = "Enter",  mods = "Control",    action = "SpawnNewInstance"},
-  { key = "N",      mods = "Control",    action = "CreateNewWindow"},
-  { key = "+",      mods = "Control",    action = "IncreaseFontSize"}, 
-  { key = "!",      mods = "Control",    action = "DecreaseFontSize"},
-  { key = ")",      mods = "Control",    action = "ResetFontSize"},
-  { key = "Escape", mods = "Control",    action = "ToggleViMode"   },
-  { key = "I",      mode = "Vi|~Search", action = "ToggleViMode"   },
-  { key = "C",      mods = "Control|Shift", action = "ReceiveChar" },
-  { key= "Back",    mods= "Control",     chars= "\u001b\u007f" } # Delete word
+  { key = "(", mods = "Control", action = "ReceiveChar" },
+  { key = "H", mods = "Control", action = "ReceiveChar" },
+  { key = "J", mods = "Control", action = "ReceiveChar" },
+  { key = "K", mods = "Control", action = "ReceiveChar" },
+  { key = "L", mods = "Control", action = "ReceiveChar" },
+  { key = "M", mods = "Control", action = "ReceiveChar" },
+  { key = "V", mods = "Control", action = "Paste" },
+  { key = "C", mods = "Control", action = "Copy" },
+  { key = "W", mods = "Control", action = "Quit" },
+  { key = "Enter", mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+  { key = "+", mods = "Control", action = "IncreaseFontSize" },
+  { key = "!", mods = "Control", action = "DecreaseFontSize" },
+  { key = ")", mods = "Control", action = "ResetFontSize" },
+  { key = "Escape", mods = "Control", action = "ToggleViMode" },
+  { key = "I", mode = "Vi|~Search", action = "ToggleViMode" },
+  { key = "C", mods = "Control|Shift", action = "ReceiveChar" },
+  { key = "Back", mods = "Control", chars = "\u001b\u007f" },             # Delete word
 
 ]
-
-

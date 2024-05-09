@@ -42,7 +42,7 @@ return {
         "pyright",
         "helm_ls",
         "jqls",
-        "marksman",
+        -- "marksman",
         "mdx_analyzer",
         "ruff_lsp",
         "rust_analyzer",
@@ -63,7 +63,7 @@ return {
         "black", -- python formatter
         "pylint", -- python linter
         "eslint_d", -- js linter
-        "rust_fmt"
+        "rust_fmt",
       },
     })
   end,

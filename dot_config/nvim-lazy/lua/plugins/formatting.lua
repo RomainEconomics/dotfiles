@@ -4,6 +4,7 @@ return {
     formatters_by_ft = {
       ["python"] = { "ruff_format", "ruff_fix", "black" },
       ["rust"] = { "rustfmt" },
+      ["toml"] = { "taplo" },
     },
   },
   -- opts = {
