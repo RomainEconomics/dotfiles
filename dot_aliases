@@ -50,6 +50,8 @@ alias dcl="docker compose logs"
 alias dex="docker exec -it"
 alias drm="docker_rm"
 
+alias lzd="lazydocker"
+
 
 ############################################################################
 # Kubernetes

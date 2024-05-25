@@ -43,7 +43,7 @@ return {
         "helm_ls",
         "jqls",
         -- "marksman",
-        "mdx_analyzer",
+        -- "mdx_analyzer",
         "ruff_lsp",
         "rust_analyzer",
         "prismals",

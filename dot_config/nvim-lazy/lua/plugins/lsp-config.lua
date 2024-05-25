@@ -5,8 +5,8 @@ return {
     -- change a keymap
     -- keys[#keys + 1] = { "K", "<cmd>echo 'hello'<cr>" }
     -- disable a keymap
-    keys[#keys + 1] = { "K", false } -- disabled bc used for navigation already
-    keys[#keys + 1] = { "<c-k>", false, mode = { "i" } } -- disabled bc use for copilot, gK still available in normal mode
+    keys[#keys + 1] = { "K", false } -- disable bc used for navigation already
+    keys[#keys + 1] = { "<c-k>", false, mode = { "i" } } -- use for copilot, gK still available in normal mode
     -- add a keymap
     keys[#keys + 1] = { "<c-K>", vim.lsp.buf.hover, desc = "Hover" }
   end,
