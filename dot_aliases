@@ -139,9 +139,8 @@ alias pystart="python3 -m venv venv && source venv/bin/activate && pip install -
 # Vim / Neovim
 ############################################################################
 
-alias nvim="NVIM_APPNAME=nvim-lazy nvim"
-alias v="nvim"
-alias vim="v"
+alias vim="NVIM_APPNAME=nvim-lazy nvim"
+alias v="vim"
 
 ############################################################################
 # Tmux

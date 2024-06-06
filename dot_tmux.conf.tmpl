@@ -44,6 +44,8 @@ set -g escape-time 0
 bind-key x kill-pane          # skip "kill-pane 1? (y/n)" prompt
 set -g detach-on-destroy off  # don't exit from tmux when closing a session
 
+bind-key g new-window -c "#{pane_current_path}" "lazygit"
+
 # Navigation
 
 #is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
