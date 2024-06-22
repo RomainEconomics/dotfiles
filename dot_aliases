@@ -5,7 +5,19 @@
 
 # create or attach to existing tmux session
 function sesh_connect() {
-  sesh connect $(sesh list | fzf)
+  #sesh connect $(sesh list | fzf)
+  sesh connect \"$(
+        sesh list | fzf-tmux -p 55%,60% \
+                --no-sort --border-label ' sesh ' --prompt '⚡  ' \
+                --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+                --bind 'tab:down,btab:up' \
+                --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list)' \
+                --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t)' \
+                --bind 'ctrl-g:change-prompt(⚙<fe0f>  )+reload(sesh list -c)' \
+                --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' \
+                --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+                --bind 'ctrl-d:execute(tmux kill-session -t {})+change-prompt(⚡  )+reload(sesh list)'
+)\"
 }
 
 alias c="clear"
@@ -24,11 +36,11 @@ alias tldrf="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-win
 alias si="sudo apt-get install"
 alias s=sesh_connect
 
-alias ls="exa"
-alias ll="exa --long --header --git --icons"
-alias ldir="ls -al | grep ^d"
-alias ll="ls -al"
-alias tree="ll --tree --level=2 -I=.git-ignore"
+alias ls="eza"
+alias ll="eza -lh --group-directories-first --icons -a"
+alias tree="eza --tree --level=2 --long --icons --git"
+alias lt='eza --tree --level=2 --long --icons --git -a'
+
 
 alias dud="du -d 1 -h" # dis usage
 
@@ -109,7 +121,7 @@ alias gcb='git checkout -b'
 alias gcm='git checkout $(git_main_branch)'
 alias gl='git pull'
 alias glr='git pull --rebase'
-alias gs="git_add_reset_fzf"
+# alias gs="git_add_reset_fzf"
 alias glg='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --date=short'
 alias gm='git merge'
 alias gma='git merge --abort'

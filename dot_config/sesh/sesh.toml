@@ -1,9 +1,9 @@
 
-[default_session]
+# [default_session]
 # startup_command = "nvim -c ':Telescope find_files'"
 # startup_command = "NVIM_APPNAME=nvim-lazy nvim ."
 
-[[session]]
-name = "Downloads 📥"
-path = "~/Downloads"
-startup_command = "ls"
+# [[session]]
+# name = "Downloads 📥"
+# path = "~/Downloads"
+# startup_command = "ls"
