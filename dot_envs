@@ -16,6 +16,13 @@ export PATH="/usr/bin/pkg-config /home/linuxbrew/.linuxbrew/bin/pkg-config:$PATH
 
 
 ############################################################################
+# Deno
+############################################################################
+
+export DENO_INSTALL="/home/rjouhameau/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+############################################################################
 # GCP
 ############################################################################
 
@@ -78,9 +85,10 @@ esac
 source <(ng completion script)
 
 
-# bun
+############################################################################
+# Bun
+############################################################################
 
-# completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 export BUN_INSTALL="$HOME/.bun"
@@ -98,7 +106,6 @@ export KUBECONFIG=$KUBECONFIG:$(find ~/.kube/ -iname "kubeconfig*" | tr "\n" ":"
 source <(kubectl completion zsh)
 
 
-
 ############################################################################
 # Nvim Package manager (BOB)
 ############################################################################
@@ -112,6 +119,12 @@ export PATH=/home/rjouhameau/.local/share/bob/nvim-bin:$PATH
 
 # Python Repl config
 export PYTHONSTARTUP=~/.pythonstartup
+
+############################################################################
+# Starship
+############################################################################
+
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 
 ############################################################################
