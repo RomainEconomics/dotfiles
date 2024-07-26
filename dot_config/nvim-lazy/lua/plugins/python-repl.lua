@@ -5,7 +5,7 @@ return {
   config = function()
     require("nvim-python-repl").setup({
       execute_on_send = true,
-      vsplit = false,
+      vsplit = true,
     })
 
     vim.keymap.set("n", "<leader>rr", function()
