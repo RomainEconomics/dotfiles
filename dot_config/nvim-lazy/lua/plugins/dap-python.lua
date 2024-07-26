@@ -11,9 +11,7 @@ return {
 
     local dap = require("dap")
 
-    require("dap-python").setup(
-      "/home/rjouhameau/.local/share/nvim-lazy/mason/packages/debugpy/venv/bin/python"
-    )
+    require("dap-python").setup("/home/rjouhameau/.local/share/nvim-lazy/mason/packages/debugpy/venv/bin/python")
     -- require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
 
     table.insert(require("dap").configurations.python, {
@@ -29,24 +27,24 @@ return {
     --
     -- require("dap-python").setup(dap_python_path)
     --
-  --   dap.adapters.python = {
-  --     type = "executable",
-  --     -- command = os.getenv("VIRTUAL_ENV") .. "/bin/python",
-  --     command = vim.fn.exepath("debugpy-adapter"),
-  --     args = { "-m", "debugpy.adapter" },
-  --   }
-  --
-  --   dap.configurations.python = {
-  --     {
-  --       type = "python",
-  --       request = "launch",
-  --       name = "Launch file from SUPER config",
-  --       program = "${file}",
-  --       cwd = "${workspaceFolder}",
-  --       -- pythonPath = function()
-  --       --   return "/home/rjouhameau/.local/share/nvim-lazy/mason/packages/debugpy/venv/bin/python"
-  --       -- end,
-  --     },
-  --   }
+    --   dap.adapters.python = {
+    --     type = "executable",
+    --     -- command = os.getenv("VIRTUAL_ENV") .. "/bin/python",
+    --     command = vim.fn.exepath("debugpy-adapter"),
+    --     args = { "-m", "debugpy.adapter" },
+    --   }
+    --
+    --   dap.configurations.python = {
+    --     {
+    --       type = "python",
+    --       request = "launch",
+    --       name = "Launch file from SUPER config",
+    --       program = "${file}",
+    --       cwd = "${workspaceFolder}",
+    --       -- pythonPath = function()
+    --       --   return "/home/rjouhameau/.local/share/nvim-lazy/mason/packages/debugpy/venv/bin/python"
+    --       -- end,
+    --     },
+    --   }
   end,
 }
