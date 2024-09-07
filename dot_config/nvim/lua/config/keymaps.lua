@@ -17,3 +17,6 @@ vim.cmd("nmap k gk") -- avoid line wrap
 
 keymap.set({ "n", "v" }, "J", "5jzz", { desc = "Move down 5 row at a time and center screen " })
 keymap.set({ "n", "v" }, "K", "5kzz", { desc = "Move up 5 row at a time and center screen " })
+
+-- obsidian
+keymap.set({ "n", "v" }, "<leader>on", "<cmd>ObsidianNew<cr>", { desc = "Open new obsidian note" })

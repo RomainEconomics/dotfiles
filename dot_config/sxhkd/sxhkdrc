@@ -37,7 +37,7 @@ XF86AudioMute
 
 # Open Terminal
 super + Return
-	/usr/local/bin/alacritty
+	/home/rjouhameau/.local/kitty.app/bin/kitty
 
 # browser
 super + b

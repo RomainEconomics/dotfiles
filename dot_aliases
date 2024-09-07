@@ -6,7 +6,7 @@
 # create or attach to existing tmux session
 function sesh_connect() {
   #sesh connect $(sesh list | fzf)
-  sesh connect \"$(
+  sesh connect $(
         sesh list | fzf-tmux -p 55%,60% \
                 --no-sort --border-label ' sesh ' --prompt '⚡  ' \
                 --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
@@ -17,7 +17,7 @@ function sesh_connect() {
                 --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z)' \
                 --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
                 --bind 'ctrl-d:execute(tmux kill-session -t {})+change-prompt(⚡  )+reload(sesh list)'
-)\"
+)
 }
 
 alias c="clear"
@@ -73,6 +73,7 @@ alias k="kubectl"
 alias kx="kubectx"
 alias kn="kubens"
 alias kex="k exec -it"
+alias kgp='k get pods'
 alias kl="stern . -n"
 
 alias h="helm"
@@ -151,7 +152,8 @@ alias pystart="uv venv && source .venv/bin/activate && uv pip install -r require
 # Vim / Neovim
 ############################################################################
 
-alias vim="NVIM_APPNAME=nvim-lazy nvim"
+# alias vim="NVIM_APPNAME=nvim-lazy nvim"
+alias vim="nvim"
 alias v="vim"
 
 ############################################################################
