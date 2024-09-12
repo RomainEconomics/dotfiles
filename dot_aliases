@@ -1,4 +1,3 @@
-
 ############################################################################
 # CLI
 ############################################################################
@@ -33,6 +32,7 @@ alias hack="interactive_word_finder 'hack'"
 alias jqp="jqp --config ~/.config/jpq/config.yaml"
 alias todo="interactive_word_finder 'todo'"
 alias tldrf="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"
+alias req="touch requirements.txt"
 alias si="sudo apt-get install"
 alias s=sesh_connect
 

@@ -7,6 +7,7 @@ return {
       lua = true,
       markdown = true,
       python = true,
+      r = true,
       javascript = true,
       typescript = true,
       rust = true,

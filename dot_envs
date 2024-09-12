@@ -112,6 +112,7 @@ source <(kubectl completion zsh)
 ############################################################################
 
 export PATH=/home/rjouhameau/.local/share/bob/nvim-bin:$PATH
+export NVIM_APPNAME="nvim"
 
 
 ############################################################################
