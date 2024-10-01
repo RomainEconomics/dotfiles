@@ -75,6 +75,7 @@ alias kn="kubens"
 alias kex="k exec -it"
 alias kgp='k get pods'
 alias kl="stern . -n"
+alias k8s='nvim +"lua require(\"kubectl\").open()"'
 
 alias h="helm"
 alias hi="helm install"
