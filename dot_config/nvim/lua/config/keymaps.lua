@@ -18,3 +18,5 @@ keymap.set("n", "<leader>k", '<cmd>lua require("kubectl").toggle()<cr>', { norem
 
 keymap.set({ "n", "v" }, "J", "5jzz", { desc = "Move down 5 row at a time and center screen " })
 keymap.set({ "n", "v" }, "K", "5kzz", { desc = "Move up 5 row at a time and center screen " })
+
+-- keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = 'Search And Replace The Word Under The Cursor'})

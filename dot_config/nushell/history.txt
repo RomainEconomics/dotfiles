@@ -1,0 +1,117 @@
+ls
+ls | where size > 3kb
+ls | where size > 3kb | order-by size
+ls | where size > 3kb | sort-by size
+ls | where size > 3kb | sort-by -size
+"12" | into int<\n>
+"12" | into int
+'{"a": 12, "b": "abc"}'
+'{"a": 12, "b": "abc"}' | get a
+{"a": 12, "b": "abc"} | get a
+[one two three] | to yaml
+{"a": 12, "b": "abc"} | select a
+{"a": 12, "b": "abc"} | select b
+let name = "Alice"
+$"greetings, ($name)!"
+"one,two,three" | split row ","
+"acronym,long\nAPL,A Programming Language" | from csv
+"acronym,long\nAPL,A Programming Language" | from csv | select long
+"acronym,long\nAPL,A Programming Language" | from csv | get long
+$'(ansi purple_bold)This text is a bold purple!(ansi reset)'
+ls | where size > 3kb | sort-by -size
+ls | where size > 3kb | sort-by size
+ls | where size > 3kb | sort-by size | last
+ls | where size > 3kb | sort-by size | last 2
+ls | where size > 3kb | sort-by size | first 2
+ls
+open chezmoi.toml
+open chezmoi.toml | get edit
+open chezmoi.toml | get edit.args
+open chezmoi.toml | get edit.code
+open chezmoi.toml | get edit.command
+open chezmoi.toml
+open chezmoi.toml | select git
+open chezmoi.toml | get git
+ll
+ls
+ls dot_config/
+ls dot_config/kitty/
+ls dot_config/jpq/
+ls dot_config/waybar/symlink_style.css
+open dot_config/waybar/symlink_style.css
+ll
+ls
+open dot_zshrc
+cd ..
+ll
+ls
+cd ..
+ls
+ls -al
+open .angular-config.json
+open .angular-config.json | get cli
+cd Documents/repos/chatapp/backend/
+ls
+open chat.db
+open chat.db | get users
+http get https://blog.rust-lang.org/feed.xml
+1..10 | each {$in * 2}<\n>
+1..10 | each {$in * 2}
+01..10 | each {$in * 2}
+help str
+v
+nvim
+'hello' | str contains 'll'
+'hello' | str contains 'lm'
+'hello' | str index-of 'l'
+'hello' | str index-of 'o'
+'hello' | str index-of 'p'
+'hello' | str length 
+'hello    ' | str trim 
+'hello    ' | str trim | str upcase 
+'hello    ' | str trim | str upcase | str reverse 
+'col1,col2\nr1,r1\nr2,r2' | from csv
+'col1,col2\nr1,r1\nr2,r2' | from csv ','
+help csv
+help str
+csv
+'col1,col2\nr1,r1\nr2,r2' | to csv
+'col1,col2\nr1,r1\nr2,r2' | from csv
+"col1,col2\nr1,r1\nr2,r2" | from csv
+open chat.db | get users
+open chat.db
+open chat.db | schema
+ll
+ll
+ls
+cd ...
+ll
+ls
+cd ..
+ll
+ls
+ls -al
+ls -al | explore
+$env
+$env | explore
+$env | keys
+$env.PATH
+$env.PATH | uniq
+$env | get PATH
+$env | get PATH | uniq
+$env | get PATH | uniq | str contains usr
+$env | get PATH | uniq | each {|v| str contains usr}
+$env | get PATH | uniq | each {|v| if str contains usr {$v} }
+$env | get PATH | uniq | each {|v| if $v str contains usr {$v} }
+$env | get PATH | uniq | filter str contains usr
+$env | get PATH | uniq | filter {str contains usr}
+ls | group-by type
+ls | filter {type == file}
+ls | where type == file
+ls | where type == dir
+ls | where type == dir | get name
+[foo.txt bar.csv baz.txt] | group-by { path parse | get extension }
+baz.txt | path parse
+'baz.txt' | path parse
+$nu.env-path
+$nu.config-path
