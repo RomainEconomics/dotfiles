@@ -1,10 +1,9 @@
 # Dotfiles
 
-This repository contains my dotfiles.
+Managed with stow
 
-I use [chezmoi](https://www.chezmoi.io/) to manage my dotfiles.
-
-## TODO
-
-- [ ] Test on different OS / Distro
-- [ ] Add window manager config (qtile, sway or hyprland)
+```
+sudo apt install stow
+git clone
+stow .
+```

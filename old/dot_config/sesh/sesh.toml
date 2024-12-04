@@ -1,0 +1,10 @@
+
+[default_session]
+# startup_command = "nvim -c ':Telescope find_files'"
+startup_command = "ll"
+# startup_command = "NVIM_APPNAME=nvim-lazy /home/rjouhameau/.local/share/bob/nvim-bin/nvim ."
+
+# [[session]]
+# name = "Downloads 📥"
+# path = "~/Downloads"
+# startup_command = "ls"
