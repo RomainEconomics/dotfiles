@@ -1,0 +1,13 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.editor.mini-move",
+    "lazyvim.plugins.extras.editor.overseer",
+    "lazyvim.plugins.extras.ui.alpha",
+    "lazyvim.plugins.extras.ui.indent-blankline",
+    "lazyvim.plugins.extras.ui.mini-starter"
+  ],
+  "news": {
+    "NEWS.md": "10960"
+  },
+  "version": 7
+}

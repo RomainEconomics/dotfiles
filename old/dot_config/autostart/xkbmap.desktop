@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=xkbmap
-Comment=Swap Alt and Ctrl cmd
-Exec=/usr/bin/setxkbmap -option ctrl:swap_lalt_lctl
-Terminal=true
-Type=Application

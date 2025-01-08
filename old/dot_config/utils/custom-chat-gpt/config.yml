@@ -1,6 +1,0 @@
-model_name: gpt-4o
-sqlite_db: ~/.config/utils/custom-chat-gpt/db.sqlite3
-weaviate_host: localhost
-weaviate_port: 8089
-weaviate_grpc_host: localhost
-weaviate_grpc_port: 50052

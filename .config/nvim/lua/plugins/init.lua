@@ -1,9 +1,6 @@
 return {
-  "nvim-lua/plenary.nvim", -- lua functions that many plugins use
-
-  "christoomey/vim-tmux-navigator", -- tmux & split window navigation
-
-  "inkarkat/vim-ReplaceWithRegister", -- replace with register contents using motion (gr + motion)
-
-  "mg979/vim-visual-multi", -- multiple cursors in vim
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'famiu/bufdelete.nvim',
+  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  'mg979/vim-visual-multi', -- multiple cursors in vim
 }

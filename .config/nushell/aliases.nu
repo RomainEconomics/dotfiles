@@ -58,13 +58,17 @@ alias dud = du -d 1 -h # dis usage
 # Docker
 ############################################################################
 
+def drm [s: string] {
+        docker stop $s; docker rm $s;
+}
+
+
 alias dps = docker ps
 alias dc = docker compose
 alias dcu = docker compose up
 alias dcd = docker compose down
 alias dcl = docker compose logs
 alias dex = docker exec -it
-alias drm = docker_rm
 
 alias lzd = lazydocker
 
@@ -156,8 +160,8 @@ def pystart [] {
 
 # alias vim = NVIM_APPNAME = nvim-lazy nvim
 alias vim = nvim
-alias v = env NVIM_APPNAME=nvim-kickstart nvim
-alias vi = vim
+alias v = nvim
+alias vi = env NVIM_APPNAME=nvim-lazy nvim
 
 ############################################################################
 # Tmux
