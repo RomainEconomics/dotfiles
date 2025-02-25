@@ -217,6 +217,11 @@ return {
     t ')',
     i(0),
   }),
+  s('err', {
+    t { 'if err != nil {', '\t' },
+    i(1),
+    t { '', '}' },
+  }),
   s('nil', {
     t 'if ',
     i(1),
@@ -233,5 +238,51 @@ return {
     t { '', '}', '' },
     t { 'defer resp.Body.Close()', '' },
     t 'body, err := io.ReadAll(resp.Body)',
+  }),
+  s('assert', {
+    t 'if got, want := ',
+    i(1),
+    t ', ',
+    i(2),
+    t { '; got != want {', '' },
+    t '\tt.Errorf("',
+    i(3),
+    t { '=%s, want=%s", got, want)', '' },
+    t '}',
+  }),
+
+  s('str', {
+    t 'type ',
+    i(1),
+    t ' struct {',
+    t { '', '\t' },
+    i(2),
+    t { '', '}' },
+  }),
+
+  s('param', {
+    t 'type parameters struct {',
+    t { '', '\t' },
+    i(1),
+    t { '', '}' },
+  }),
+
+  s('handp', {
+    t 'type parameters struct {',
+    t { '', '\t' },
+    t { '', '}', '' },
+    t { '', 'type ' },
+    i(1),
+    t { ' struct {' },
+    t { '', '\t' },
+    i(2),
+    t { '', '}', '' },
+    t { 'decoder := json.NewDecoder(r.Body)', '' },
+    t { 'params := parameters{}', '' },
+    t { 'err := decoder.Decode(&params)', '' },
+    t { 'if err != nil {', '' },
+    t { '\tutils.RespondWithError(w, http.StatusInternalServerError, "Couldn t decode parameters", err)', '' },
+    t { '\treturn', '' },
+    t '}',
   }),
 }

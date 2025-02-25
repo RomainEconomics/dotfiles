@@ -1,4 +1,5 @@
 --  For more options, you can see `:help option-list`
+vim.o.shell = '/usr/bin/zsh'
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -13,9 +14,7 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -66,3 +65,9 @@ vim.opt.foldtext = ''
 
 vim.opt.linebreak = true -- Wrap lines at convenient points
 vim.opt.wrap = false -- Disable line wrap
+
+vim.filetype.add({
+	extension = {
+		['http'] = 'http',
+	},
+})

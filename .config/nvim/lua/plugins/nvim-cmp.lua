@@ -34,6 +34,7 @@ return { -- Autocompletion
     require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/luasnip-snippets' }
 
     ls.config.setup {}
+    ls.filetype_extend('typescript', { 'javascript' })
 
     cmp.setup {
       snippet = {

@@ -1,15 +1,13 @@
 return { -- Autoformat
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
+	'stevearc/conform.nvim',
+	event = { 'BufWritePre' },
+	cmd = { 'ConformInfo' },
 	keys = {
 		{
-			"<leader>f",
-			function()
-				require("conform").format({ async = true, lsp_format = "fallback" })
-			end,
-			mode = "",
-			desc = "[F]ormat buffer",
+			'<leader>f',
+			function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
+			mode = '',
+			desc = '[F]ormat buffer',
 		},
 	},
 	opts = {
@@ -31,21 +29,21 @@ return { -- Autoformat
 		--   }
 		-- end,
 		formatters_by_ft = {
-			lua = { "stylua" },
-			rust = { "rustfmt" },
-			toml = { "taplo" },
+			lua = { 'stylua' },
+			rust = { 'rustfmt' },
+			toml = { 'taplo' },
 			-- python = { 'ruff' },
-			python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
-			javascript = { "prettier" },
-			javascriptreact = { "prettier" },
-			typescript = { "prettier" },
-			typescriptreact = { "prettier" },
-			css = { "prettier" },
-			scss = { "prettier" },
-			html = { "prettier" },
-			json = { "prettier" },
-			yaml = { "prettier" },
-			markdown = { "prettier" },
+			python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
+			javascript = { 'prettier' },
+			javascriptreact = { 'prettier' },
+			typescript = { 'prettier' },
+			typescriptreact = { 'prettier' },
+			css = { 'prettier' },
+			scss = { 'prettier' },
+			html = { 'prettier' },
+			json = { 'prettier' },
+			yaml = { 'prettier' },
+			markdown = { 'prettier' },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
 
@@ -53,10 +51,9 @@ return { -- Autoformat
 			-- You can use 'stop_after_first' to run the first available formatter from the list
 			-- javascript = { "prettierd", "prettier", stop_after_first = true },
 		},
-		format_on_save = {
-			timeout_ms = 500,
-			lsp_fallback = true,
-			format_after_save = true,
-		},
+		format_on_save = function(buf)
+			if vim.g.disable_autoformat or vim.b[buf].disable_autoformat then return end
+			return { timeout_ms = 500, lsp_fallback = true, format_after_save = true }
+		end,
 	},
 }

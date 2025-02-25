@@ -15,9 +15,7 @@ def tldrf [] {
 }
 
 alias ch = cheat_sheet
-alias ca = chezmoi apply
-alias cc = chat-gpt chat
-alias ccm = chat-gpt chat --markdown
+alias llmm = llm chat --markdown
 alias e = exit
 alias req = touch requirements.txt
 alias si = sudo apt-get install

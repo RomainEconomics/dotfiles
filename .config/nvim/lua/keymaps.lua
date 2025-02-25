@@ -1,124 +1,100 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+local keymap = vim.keymap.set
 
--- Diagnostic keymaps
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Clear highlights on search
+keymap('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear Search Highlights' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- Exit terminal mode
+keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode with jk' })
+-- Window navigation
+keymap('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- Quick movement
+keymap({ 'n', 'v' }, 'J', '5jzz', { desc = 'Move down 5 rows and center' })
+keymap({ 'n', 'v' }, 'K', '5kzz', { desc = 'Move up 5 rows and center' })
+keymap({ 'n', 'v' }, 'gh', '^', { desc = 'Go to the beginning line' })
+keymap({ 'n', 'v' }, 'gl', '$', { desc = 'Go to the end of the line' })
 
--- vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down' })
--- vim.keymap.set({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down' })
--- vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up' })
--- vim.keymap.set({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up' })
+-- To keep ? or not ?
+keymap({ 'n', 'v' }, 'dh', 'd^', { desc = 'Delete to the beginning line' })
+keymap({ 'n', 'v' }, 'dl', 'd$', { desc = 'Delete to the end of the line' })
+keymap({ 'n', 'v' }, 'ch', 'c^', { desc = 'Delete and Insert to the beginning line' })
+keymap({ 'n', 'v' }, 'cl', 'c$', { desc = 'Delete and Insert to the end of the line' })
 
-vim.keymap.set({ 'n', 'v' }, 'J', '5jzz', { desc = 'Move down 5 row at a time and center screen ' })
-vim.keymap.set({ 'n', 'v' }, 'K', '5kzz', { desc = 'Move up 5 row at a time and center screen ' })
+-- Move lines
+keymap('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
+keymap('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
+keymap('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
+keymap('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
+keymap('v', '<A-j>', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down' })
+keymap('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up' })
 
-vim.keymap.set({ 'n', 'v' }, 'gh', '^', { desc = '[P]Go to the beginning line' })
-vim.keymap.set({ 'n', 'v' }, 'gll', '$', { desc = '[P]go to the end of the line' })
+-- File Explorer
+keymap('n', '<leader>e', function() require('mini.files').open() end, { desc = 'Open File Explorer' })
 
--- vim.keymap.set({ 'n', 'v' }, '<leader>qq', '5kzz', { desc = 'Move up 5 row at a time and center screen ' })
+-- Quit All
+keymap('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
--- Move Line
-vim.keymap.set('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
-vim.keymap.set('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
-vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
-vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
-vim.keymap.set('v', '<A-j>', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down' })
-vim.keymap.set('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up' })
+-- Save File
+keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 
-vim.keymap.set('n', '<leader>e', function()
-  require('mini.files').open()
-end, { desc = 'Open File Explorer' })
+-- Window management
+keymap('n', '<leader>wv', '<C-w>v', { desc = 'Split window vertically' })
+keymap('n', '<leader>wh', '<C-w>s', { desc = 'Split window horizontally' })
+keymap('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window' })
 
-vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
+-- Resize window
+keymap('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+keymap('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+keymap('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+keymap('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
 
-vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+-- Buffers
+keymap('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+keymap('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+keymap('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+keymap('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+keymap('n', '<leader>bd', '<cmd>Bdelete<cr>', { desc = 'Delete Buffer' })
+keymap('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
 
--- window management
-vim.keymap.set('n', '<leader>wv', '<C-w>v', { desc = 'Split window vertically' }) -- split window vertically
-vim.keymap.set('n', '<leader>wh', '<C-w>s', { desc = 'Split window horizontally' }) -- split window horizontally
-vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window' })
+-- Lazy
+keymap('n', '<leader>ll', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+keymap('n', '<leader>cx', '<cmd>source %<cr>', { desc = 'Source Current File' })
 
--- Resize window using <ctrl> arrow keys
-vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
-vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
-vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
-vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
-
--- buffers
-vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
-vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
-vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
-vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
-vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
-vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
-vim.keymap.set('n', '<leader>bd', '<cmd>Bdelete<cr>', { desc = 'Delete Buffer' })
-vim.keymap.set('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
-
-vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
-vim.keymap.set('n', '<leader>cx', '<cmd>source %<cr>', { desc = 'Lazy' })
-
-local blame = require 'modules.blame'
-
-vim.keymap.set('n', '<leader>gb', function()
-  blame.blame_line()
-end, { desc = 'Git Blame' })
-
--- diagnostic
+-- Diagnostics
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go { severity = severity }
-  end
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function() go({ severity = severity }) end
 end
-vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
-vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
-vim.keymap.set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
-vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
-vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
-vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
-vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
--- Function to copy file path to clipboard
+keymap('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+keymap('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
+keymap('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
+keymap('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+keymap('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+keymap('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+keymap('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
+
+-- Copy file path to clipboard
 local function copy_filepath_to_clipboard()
-  local filePath = vim.fn.expand '%:~' -- Gets the file path relative to the home directory
-  vim.fn.setreg('+', filePath) -- Copy the file path to the clipboard register
-  vim.notify(filePath, vim.log.levels.INFO)
-  vim.notify('Path copied to clipboard: ', vim.log.levels.INFO)
+	local filePath = vim.fn.expand('%:~')
+	vim.fn.setreg('+', filePath)
+	vim.notify('Path copied to clipboard: ' .. filePath, vim.log.levels.INFO)
 end
--- Keymaps for copying file path to clipboard
--- vim.keymap.set("n", "<leader>fp", copy_filepath_to_clipboard, { desc = "[P]Copy file path to clipboard" })
--- I couldn't use <M-p> because its used for previous reference
-vim.keymap.set({ 'n', 'v', 'i' }, '<M-c>', copy_filepath_to_clipboard, { desc = '[P]Copy file path to clipboard' })
 
-vim.keymap.set('n', '<leader>cm', '<cmd>Mason<cr>', { desc = 'Open Mason' })
+keymap({ 'n', 'v', 'i' }, '<M-c>', copy_filepath_to_clipboard, { desc = 'Copy file path to clipboard' })
 
-vim.keymap.set('n', '<leader>cH', function()
-  require('telescope.builtin').find_files {
-    cwd = '~/Documents/repos/cheat-sheet/cheat_sheet',
-    hidden = true,
-  }
-end, { desc = 'Search Cheat Sheet files' })
+-- Mason
+keymap('n', '<leader>cm', '<cmd>Mason<cr>', { desc = 'Open Mason' })
+
+-- LLM
+keymap({ 'n', 'v' }, '<leader>zz', function() require('llm').llm_with_picker() end, { desc = 'Start LLM Chat with picker' })
+keymap({ 'n', 'v' }, '<leader>zZ', function() require('llm').llm({ model = 'claude-3-5-sonnet-20241022' }) end, { desc = 'Start LLM Chat' })
+keymap('n', '<leader>zh', function() require('llm').llm_with_history() end, { desc = 'Start LLM Chat' })
