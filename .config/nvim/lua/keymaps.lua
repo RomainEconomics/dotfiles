@@ -98,3 +98,8 @@ keymap('n', '<leader>cm', '<cmd>Mason<cr>', { desc = 'Open Mason' })
 keymap({ 'n', 'v' }, '<leader>zz', function() require('llm').llm_with_picker() end, { desc = 'Start LLM Chat with picker' })
 keymap({ 'n', 'v' }, '<leader>zZ', function() require('llm').llm({ model = 'claude-3-7-sonnet-20250219' }) end, { desc = 'Start LLM Chat' })
 keymap('n', '<leader>zh', function() require('llm').llm_with_history() end, { desc = 'Start LLM Chat' })
+
+keymap('n', '<leader>cc', '<cmd>Copilot<cr>', { desc = 'Start Copilot' })
+
+-- MCP Hub
+keymap('n', '<leader>mc', '<cmd>MCPHub<cr>', { desc = 'Open MCP Hub' })

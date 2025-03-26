@@ -147,4 +147,8 @@ return {
 			vim.keymap.set('n', '<leader>jD', '<cmd>JupyterDeleteCell<CR>', { desc = 'Delete cell under cursor and store in register' })
 		end,
 	},
+	{
+		'benomahony/uv.nvim',
+		config = function() require('uv').setup() end,
+	},
 }
