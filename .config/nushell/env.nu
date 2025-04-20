@@ -78,6 +78,7 @@ $env.NU_PLUGIN_DIRS = [
 source ($nu.default-config-dir | path join 'path.nu')
 source '~/.secrets.nu'
 
+use ~/dotfiles/.config/scripts/scripts.nu *
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 mkdir ~/.cache/carapace
