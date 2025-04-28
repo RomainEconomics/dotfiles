@@ -42,6 +42,7 @@ return {
         "pyright",
         "helm_ls",
         "jqls",
+        "tinymist",
         -- "marksman",
         -- "mdx_analyzer",
         "prismals",

@@ -95,7 +95,7 @@ return {
 		{
 			'<leader>cH',
 			function() Snacks.picker.files({ cwd = '~/Documents/repos/cheat-sheet/cheat_sheet' }) end,
-			desc = 'Find Config File',
+			desc = 'Find Cheat Sheet',
 		},
 	},
 	init = function()

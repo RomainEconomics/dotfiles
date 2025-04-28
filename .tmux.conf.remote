@@ -1,0 +1,64 @@
+# scp ~/.tmux.conf.remote user@remote-host:~/.tmux.conf
+
+# set -g default-terminal "screen-256color"
+set -g default-terminal "${TERM}"
+
+set -gq allow-passthrough on
+# set -ga update-environment TERM
+# set -ga update-environment TERM_PROGRAM
+set -g visual-activity off
+
+# Start windows and panes at 1 index
+set -g base-index 1
+set -g pane-base-index 1
+set-window-option -g pane-base-index 1
+set-option -g renumber-windows on
+set-option -g status-position top
+
+set -g prefix C-q
+
+unbind C-b
+bind-key C-q send-prefix
+
+unbind %
+bind - split-window -h -c "#{pane_current_path}"
+
+unbind '"'
+bind _ split-window -v -c "#{pane_current_path}"
+
+unbind r
+bind r source-file ~/.tmux.conf
+
+set-option -g default-shell /usr/bin/bash
+
+bind -r C-j resize-pane -D 5
+bind -r C-k resize-pane -U 5
+bind -r C-l resize-pane -R 5
+bind -r C-h resize-pane -L 5
+
+bind -r m resize-pane -Z
+set -g mouse on
+set -g focus-events on
+
+set-window-option -g mode-keys vi
+
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection
+
+unbind -T copy-mode-vi MouseDragEnd1Pane
+
+set -g escape-time 0
+bind-key x kill-pane          # skip "kill-pane 1? (y/n)" prompt
+set -g detach-on-destroy off  # don't exit from tmux when closing a session
+
+
+# Navigation
+
+# vim-like pane switching
+bind -r ^ last-window
+bind -r k select-pane -U
+bind -r j select-pane -D
+bind -r h select-pane -L
+bind -r l select-pane -R
+
+

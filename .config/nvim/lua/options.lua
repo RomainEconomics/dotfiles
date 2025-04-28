@@ -59,9 +59,19 @@ vim.opt.scrolloff = 10
 vim.opt.shiftwidth = 0 -- Size of an indent
 vim.opt.smartindent = true -- Insert indents automatically
 
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = 'expr'
-vim.opt.foldtext = ''
+-- Fold
+-- vim.o.foldcolumn = '1'
+-- vim.opt.foldlevel = 99
+-- vim.opt.foldtext = ''
+-- vim.opt.foldmethod = 'expr'
+-- vim.opt.foldexpr = 'vim.treesitter.foldexpr()'
+--
+-- vim.api.nvim_create_autocmd('FileType', {
+-- 	pattern = 'python',
+-- 	callback = function() vim.cmd('set foldmethod=expr') end,
+-- })
+
+-- vim.opt.fillchars:append('fold: ')
 
 vim.opt.linebreak = true -- Wrap lines at convenient points
 vim.opt.wrap = false -- Disable line wrap
@@ -69,5 +79,14 @@ vim.opt.wrap = false -- Disable line wrap
 vim.filetype.add({
 	extension = {
 		['http'] = 'http',
+	},
+})
+
+vim.diagnostic.config({
+
+	-- virtual_lines = true,
+	virtual_lines = {
+		--  -- Only show virtual line diagnostics for the current cursor line
+		current_line = true,
 	},
 })

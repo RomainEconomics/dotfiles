@@ -88,3 +88,5 @@ $env.STARSHIP_CONFIG = "~/.config/starship/starship.toml"
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 zoxide init nushell | save -f ~/.zoxide.nu
+
+$env.ZK_SHELL = "/bin/zsh"

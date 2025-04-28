@@ -2,7 +2,7 @@ return { -- Highlight, edit, and navigate code
 	'nvim-treesitter/nvim-treesitter',
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
-		-- { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+		{ 'nushell/tree-sitter-nu' },
 	},
 	build = ':TSUpdate',
 	event = { 'BufRead', 'BufNewFile' },
@@ -16,6 +16,7 @@ return { -- Highlight, edit, and navigate code
 			'html',
 			'lua',
 			'luadoc',
+			'latex',
 			'markdown',
 			'markdown_inline',
 			'nu',
@@ -25,6 +26,7 @@ return { -- Highlight, edit, and navigate code
 			'javascript',
 			'typescript',
 			'tsx',
+			'typst',
 			'yaml',
 			'dockerfile',
 			'vim',
@@ -35,7 +37,6 @@ return { -- Highlight, edit, and navigate code
 		auto_install = true,
 		highlight = {
 			enable = true,
-			disable = { 'nu' },
 		},
 		indent = { enable = true },
 		incremental_selection = {
