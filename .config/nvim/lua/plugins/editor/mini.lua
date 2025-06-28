@@ -22,11 +22,11 @@ return { -- Collection of various small independent plugins/modules
 		-- - sr)'  - [S]urround [R]eplace [)] [']
 		require('mini.surround').setup({
 			mappings = {
-				add = 'sa', -- Add surrounding in Normal and Visual modes
-				delete = 'sd', -- Delete surrounding
-				replace = 'sr', -- Replace surrounding
-				-- find = 'mf', -- Find surrounding (to the right)
-				-- find_left = 'mF', -- Find surrounding (to the left)
+				add = 'ca', -- Add surrounding in Normal and Visual modes
+				delete = 'cd', -- Delete surrounding
+				replace = 'cr', -- Replace surrounding
+				-- find = 'cf', -- Find surrounding (to the right)
+				-- find_left = 'cF', -- Find surrounding (to the left)
 				-- highlight = 'mh', -- Highlight surrounding
 				-- update_n_lines = 'mn', -- Update `n_lines`
 			},

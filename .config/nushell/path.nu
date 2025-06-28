@@ -2,6 +2,7 @@
 
 $env.path ++= [
 	($env.HOME | path join "bin"),
+	($env.HOME | path join "go/bin"),
 	($env.HOME | path join ".local/bin"),
 	($env.HOME | path join ".local/share/bob/nvim-bin"),
 	($env.HOME | path join ".bun/bin"),

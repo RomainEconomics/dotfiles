@@ -1,12 +1,12 @@
 return {
 	-- Extend auto completion
 	{
-		"hrsh7th/nvim-cmp",
+		'hrsh7th/nvim-cmp',
 		optional = true,
 		dependencies = {
 			{
-				"Saecki/crates.nvim",
-				event = { "BufRead Cargo.toml" },
+				'Saecki/crates.nvim',
+				event = { 'BufRead Cargo.toml' },
 				opts = {
 					completion = {
 						cmp = { enabled = true },
@@ -17,41 +17,37 @@ return {
 		---@param opts cmp.ConfigSchema
 		opts = function(_, opts)
 			opts.sources = opts.sources or {}
-			table.insert(opts.sources, { name = "crates" })
+			table.insert(opts.sources, { name = 'crates' })
 		end,
 	},
 
 	-- Add Rust & related to treesitter
 	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = { ensure_installed = { "rust", "ron" } },
+		'nvim-treesitter/nvim-treesitter',
+		opts = { ensure_installed = { 'rust', 'ron' } },
 	},
 
 	-- Ensure Rust debugger is installed
 	{
-		"williamboman/mason.nvim",
+		'mason-org/mason.nvim',
 		optional = true,
-		opts = { ensure_installed = { "codelldb" } },
+		opts = { ensure_installed = { 'codelldb' } },
 	},
 
 	{
-		"mrcjkb/rustaceanvim",
-		version = vim.fn.has("nvim-0.10.0") == 0 and "^5" or false,
-		ft = { "rust" },
+		'mrcjkb/rustaceanvim',
+		version = vim.fn.has('nvim-0.10.0') == 0 and '^5' or false,
+		ft = { 'rust' },
 		lazy = false,
 		opts = {
 			server = {
 				on_attach = function(_, bufnr)
-					vim.keymap.set("n", "<leader>cR", function()
-						vim.cmd.RustLsp("codeAction")
-					end, { desc = "Code Action", buffer = bufnr })
-					vim.keymap.set("n", "<leader>dr", function()
-						vim.cmd.RustLsp("debuggables")
-					end, { desc = "Rust Debuggables", buffer = bufnr })
+					vim.keymap.set('n', '<leader>cR', function() vim.cmd.RustLsp('codeAction') end, { desc = 'Code Action', buffer = bufnr })
+					vim.keymap.set('n', '<leader>dr', function() vim.cmd.RustLsp('debuggables') end, { desc = 'Rust Debuggables', buffer = bufnr })
 				end,
 				default_settings = {
 					-- rust-analyzer language server configuration
-					["rust-analyzer"] = {
+					['rust-analyzer'] = {
 						cargo = {
 							allFeatures = true,
 							loadOutDirsFromCheck = true,
@@ -64,18 +60,16 @@ return {
 						procMacro = {
 							enable = true,
 							ignored = {
-								["async-trait"] = { "async_trait" },
-								["napi-derive"] = { "napi" },
-								["async-recursion"] = { "async_recursion" },
+								['async-trait'] = { 'async_trait' },
+								['napi-derive'] = { 'napi' },
+								['async-recursion'] = { 'async_recursion' },
 							},
 						},
 					},
 				},
 			},
 		},
-		config = function(_, opts)
-			vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-		end,
+		config = function(_, opts) vim.g.rustaceanvim = vim.tbl_deep_extend('keep', vim.g.rustaceanvim or {}, opts or {}) end,
 	},
 
 	-- Correctly setup lspconfig for Rust 🚀
@@ -103,11 +97,11 @@ return {
 	-- },
 
 	{
-		"nvim-neotest/neotest",
+		'nvim-neotest/neotest',
 		optional = true,
 		opts = {
 			adapters = {
-				["rustaceanvim.neotest"] = {},
+				['rustaceanvim.neotest'] = {},
 			},
 		},
 	},

@@ -6,7 +6,6 @@ return {
 	---@type snacks.Config
 	opts = {
 		debug = { enabled = true },
-		explorer = { enabled = true },
 		notifier = { enabled = true },
 		rename = { enabled = true },
 		gitbrowse = { enabled = true },
@@ -30,7 +29,6 @@ return {
 		--
 		-- Snacks
 		--
-		{ '<leader>E', function() Snacks.explorer() end, desc = 'Open Snack Explorer' },
 		{ '<leader>ch', function() Snacks.notifier.show_history() end, desc = 'Show Notification History' },
 		{ '<leader>cR', function() Snacks.rename.rename_file() end, desc = 'Rename File' },
 		{ '<leader>gB', function() Snacks.git.blame_line() end, desc = 'Git Blame Line' },
