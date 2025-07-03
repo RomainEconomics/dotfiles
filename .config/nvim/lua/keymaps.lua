@@ -165,3 +165,6 @@ end
 
 -- Add the keymap
 keymap('n', '<leader>ht', html_to_text, { desc = 'Convert HTML URL to text and append to buffer' })
+
+keymap('n', '<leader>gws', function() Snacks.picker.worktrees() end)
+keymap('n', '<leader>gwn', function() Snacks.picker.worktrees_new() end)

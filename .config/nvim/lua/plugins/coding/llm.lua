@@ -1,4 +1,5 @@
 return {
-	'RomainEconomics/llm.nvim',
+	-- 'RomainEconomics/llm.nvim',
+	dir = '/home/rjouhameau/Documents/repos/llm.nvim',
 	event = 'VeryLazy',
 }

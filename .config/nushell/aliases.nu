@@ -140,7 +140,21 @@ alias grh = git revert HEAD
 alias grs = git restore --staged
 alias gu = git reset --soft HEAD~1
 
-alias lg = lazygit
+# alias lg = lazygit
+
+# Lazygit directory switching function
+def --env lg [...args] {
+    let lazygit_new_dir_file = $"($env.HOME)/.lazygit/newdir"
+    
+    with-env { LAZYGIT_NEW_DIR_FILE: $lazygit_new_dir_file } {
+        lazygit ...$args
+    }
+    
+    if ($lazygit_new_dir_file | path exists) {
+        cd (open $lazygit_new_dir_file)
+        rm $lazygit_new_dir_file
+    }
+}
 
 
 ############################################################################

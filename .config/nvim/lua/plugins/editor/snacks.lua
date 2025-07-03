@@ -33,7 +33,11 @@ return {
 		{ '<leader>cR', function() Snacks.rename.rename_file() end, desc = 'Rename File' },
 		{ '<leader>gB', function() Snacks.git.blame_line() end, desc = 'Git Blame Line' },
 		{ '<leader>gR', function() Snacks.gitbrowse() end, desc = 'Browse Git Repo' },
-		{ '<leader>gg', function() Snacks.terminal('lazygit') end, desc = 'Open Lazygit' },
+		{
+			'<leader>gg',
+			function() Snacks.terminal('lazygit') end,
+			desc = 'Open Lazygit',
+		},
 
 		--
 		-- Pickers
