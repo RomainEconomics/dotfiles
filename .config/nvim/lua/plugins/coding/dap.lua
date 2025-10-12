@@ -1,33 +1,33 @@
 ---@param config {type?:string, args?:string[]|fun():string[]?}
 local function get_args(config)
-  local args = type(config.args) == 'function' and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
-  local args_str = type(args) == 'table' and table.concat(args, ' ') or args --[[@as string]]
+	local args = type(config.args) == 'function' and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
+	local args_str = type(args) == 'table' and table.concat(args, ' ') or args --[[@as string]]
 
-  config = vim.deepcopy(config)
-  ---@cast args string[]
-  config.args = function()
-    local new_args = vim.fn.expand(vim.fn.input('Run with args: ', args_str)) --[[@as string]]
-    if config.type and config.type == 'java' then
-      ---@diagnostic disable-next-line: return-type-mismatch
-      return new_args
-    end
-    return require('dap.utils').splitstr(new_args)
-  end
-  return config
+	config = vim.deepcopy(config)
+	---@cast args string[]
+	config.args = function()
+		local new_args = vim.fn.expand(vim.fn.input('Run with args: ', args_str)) --[[@as string]]
+		if config.type and config.type == 'java' then
+			---@diagnostic disable-next-line: return-type-mismatch
+			return new_args
+		end
+		return require('dap.utils').splitstr(new_args)
+	end
+	return config
 end
 
 return {
-  {
-    'mfussenegger/nvim-dap',
-    dependencies = {
-      'nvim-neotest/nvim-nio',
-      'rcarriga/nvim-dap-ui',
-      'mfussenegger/nvim-dap-python',
-      {
-        'theHamsta/nvim-dap-virtual-text',
-        opts = { commented = true },
-      },
-    },
+	{
+		'mfussenegger/nvim-dap',
+		dependencies = {
+			'nvim-neotest/nvim-nio',
+			'rcarriga/nvim-dap-ui',
+			'mfussenegger/nvim-dap-python',
+			{
+				'theHamsta/nvim-dap-virtual-text',
+				opts = { commented = true },
+			},
+		},
 
   -- stylua: ignore
   keys = {
@@ -49,96 +49,108 @@ return {
     { "<leader>dq", function() require("dap").terminate() end, desc = "Terminate" },
     { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
   },
-    config = function()
-      --   vim.notify('DAP config is being loaded', vim.log.levels.INFO)
-      --
-      local dap = require 'dap'
-      local dapui = require 'dapui'
-      local dap_python = require 'dap-python'
-      --   -- dap_python.setup 'python3'
-      --
-      vim.fn.sign_define('DapBreakpoint', {
-        text = '',
-        texthl = 'DiagnosticSignError',
-        linehl = '',
-        numhl = '',
-      })
+		config = function()
+			--   vim.notify('DAP config is being loaded', vim.log.levels.INFO)
+			--
+			local dap = require('dap')
+			local dapui = require('dapui')
+			local dap_python = require('dap-python')
+			--   -- dap_python.setup 'python3'
+			--
+			vim.fn.sign_define('DapBreakpoint', {
+				text = '',
+				texthl = 'DiagnosticSignError',
+				linehl = '',
+				numhl = '',
+			})
 
-      vim.fn.sign_define('DapBreakpointRejected', {
-        text = '', -- or "❌"
-        texthl = 'DiagnosticSignError',
-        linehl = '',
-        numhl = '',
-      })
+			vim.fn.sign_define('DapBreakpointRejected', {
+				text = '', -- or "❌"
+				texthl = 'DiagnosticSignError',
+				linehl = '',
+				numhl = '',
+			})
 
-      vim.fn.sign_define('DapStopped', {
-        text = '', -- or "→"
-        texthl = 'DiagnosticSignWarn',
-        linehl = 'Visual',
-        numhl = 'DiagnosticSignWarn',
-      })
+			vim.fn.sign_define('DapStopped', {
+				text = '', -- or "→"
+				texthl = 'DiagnosticSignWarn',
+				linehl = 'Visual',
+				numhl = 'DiagnosticSignWarn',
+			})
 
-      -- setup dap config by VsCode launch.json file
-      local vscode = require 'dap.ext.vscode'
-      local json = require 'plenary.json'
-      vscode.json_decode = function(str)
-        return vim.json.decode(json.json_strip_comments(str))
-      end
-    end,
-  },
-  {
-    {
-      'rcarriga/nvim-dap-ui',
-      dependencies = { 'nvim-neotest/nvim-nio' },
+			-- setup dap config by VsCode launch.json file
+			local vscode = require('dap.ext.vscode')
+			local json = require('plenary.json')
+			vscode.json_decode = function(str) return vim.json.decode(json.json_strip_comments(str)) end
+
+			dap.adapters.python = {
+				type = 'server',
+				host = '127.0.0.1',
+				port = 5678,
+			}
+
+			dap.configurations.python = {
+				{
+					type = 'python',
+					request = 'attach',
+					name = 'Attach to FastAPI',
+					host = '127.0.0.1',
+					port = 5678,
+					pathMappings = {
+						{
+							localRoot = vim.fn.getcwd(),
+							remoteRoot = vim.fn.getcwd(),
+						},
+					},
+				},
+			}
+		end,
+	},
+	{
+		{
+			'rcarriga/nvim-dap-ui',
+			dependencies = { 'nvim-neotest/nvim-nio' },
     -- stylua: ignore
     keys = {
       { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
       { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
     },
-      opts = {},
-      config = function(_, opts)
-        local dap = require 'dap'
-        local dapui = require 'dapui'
-        dapui.setup(opts)
-        dap.listeners.after.event_initialized['dapui_config'] = function()
-          dapui.open {}
-        end
-        dap.listeners.before.event_terminated['dapui_config'] = function()
-          dapui.close {}
-        end
-        dap.listeners.before.event_exited['dapui_config'] = function()
-          dapui.close {}
-        end
-      end,
-    },
+			opts = {},
+			config = function(_, opts)
+				local dap = require('dap')
+				local dapui = require('dapui')
+				dapui.setup(opts)
+				dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open({}) end
+				dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close({}) end
+				dap.listeners.before.event_exited['dapui_config'] = function() dapui.close({}) end
+			end,
+		},
 
-    -- mason.nvim integration
-    {
-      'jay-babu/mason-nvim-dap.nvim',
-      dependencies = 'mason.nvim',
-      cmd = { 'DapInstall', 'DapUninstall' },
-      opts = {
-        -- Makes a best effort to setup the various debuggers with
-        -- reasonable debug configurations
-        automatic_installation = true,
+		-- mason.nvim integration
+		{
+			'jay-babu/mason-nvim-dap.nvim',
+			dependencies = 'mason.nvim',
+			cmd = { 'DapInstall', 'DapUninstall' },
+			opts = {
+				-- Makes a best effort to setup the various debuggers with
+				-- reasonable debug configurations
+				automatic_installation = true,
 
-        -- You can provide additional configuration to the handlers,
-        -- see mason-nvim-dap README for more information
-        handlers = {},
+				-- You can provide additional configuration to the handlers,
+				-- see mason-nvim-dap README for more information
+				handlers = {},
 
-        -- You'll need to check that you have the required things installed
-        -- online, please don't ask me how to install them :)
-        ensure_installed = {
-          -- Update this to ensure that you have the debuggers for the langs you want
-          'python',
-        },
-      },
-      -- mason-nvim-dap is loaded when nvim-dap loads
-      config = function()
-        require('dap-python').setup 'uv'
-      end,
-    },
-  },
+				-- You'll need to check that you have the required things installed
+				-- online, please don't ask me how to install them :)
+				ensure_installed = {
+					-- Update this to ensure that you have the debuggers for the langs you want
+					'python',
+				},
+			},
+			-- mason-nvim-dap is loaded when nvim-dap loads
+			config = function() require('dap-python').setup('uv') end,
+		},
+	},
 }
 -- return {
 --   -- NOTE: Yes, you can install new plugins here!

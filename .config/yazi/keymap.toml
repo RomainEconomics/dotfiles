@@ -378,6 +378,11 @@ keymap = [
     "}",
   ], run = "tab_swap 1", desc = "Swap the current tab with the next tab" },
 
+  { on = [
+    "<C-c>",
+  ], run = "tab_close", desc = "Swap the current tab with the next tab" },
+
+
   # Tasks
   { on = [
     "w",

@@ -1,7 +1,7 @@
 return {
 	{
 		'nvim-neotest/neotest',
-		dependencies = { 'nvim-neotest/nvim-nio' },
+		dependencies = { 'nvim-neotest/nvim-nio', 'lawrence-laz/neotest-zig' },
 		opts = {
 			-- Can be a list of adapters like what neotest expects,
 			-- or a list of adapter names,
@@ -15,6 +15,7 @@ return {
 				--     dap_go_enabled = true,
 				--   },
 				-- }
+				['neotest-zig'] = {},
 				['neotest-python'] = {
 					-- Here you can specify the settings for the adapter, i.e.
 					-- runner = "pytest",

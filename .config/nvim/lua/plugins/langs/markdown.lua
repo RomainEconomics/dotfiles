@@ -65,7 +65,7 @@ return {
 				sign = false,
 				icons = {},
 			},
-			completions = { blink = { enabled = true } },
+			completions = { lsp = { enabled = true }, blink = { enabled = true } },
 		},
 		ft = { 'markdown', 'norg', 'rmd', 'org' },
 		-- config = function(_, opts)

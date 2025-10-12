@@ -2,8 +2,9 @@ return {
 
 	{
 		'geg2102/nvim-python-repl',
+		-- dir = '~/Documents/repos/externals/nvim-python-repl',
 		dependencies = 'nvim-treesitter',
-		ft = { 'python', 'lua' },
+		ft = { 'python', 'lua' }, -- 'ruby' },
 		config = function()
 			require('nvim-python-repl').setup({
 				execute_on_send = true,

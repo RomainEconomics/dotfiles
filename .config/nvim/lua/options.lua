@@ -1,8 +1,10 @@
 --  For more options, you can see `:help option-list`
 vim.o.shell = '/usr/bin/zsh'
 
+vim.opt.swapfile = false
 vim.opt.number = true
 vim.opt.relativenumber = true
+-- vim.opt.winborder = 'rounded'
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'

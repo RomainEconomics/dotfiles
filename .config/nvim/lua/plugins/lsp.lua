@@ -73,7 +73,7 @@ return {
 					--
 					-- When you move your cursor, the highlights will be cleared (the second autocommand).
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+					if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 						local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
 						vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 							buffer = event.buf,
@@ -96,7 +96,7 @@ return {
 						})
 					end
 
-					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+					if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
 						map(
 							'<leader>th',
 							function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })) end,
@@ -119,6 +119,7 @@ return {
 				taplo = {},
 				gopls = {},
 				pyright = {},
+				-- ty = {},
 				ruff = {},
 				tailwindcss = {},
 				ts_ls = {},
@@ -132,13 +133,16 @@ return {
 					},
 				},
 				marksman = {},
-				-- tinymist = {
-				-- 	settings = {
-				-- 		formatterMode = 'typstyle',
-				-- 		exportPdf = 'onType',
-				-- 		semanticTokens = 'disable',
-				-- 	},
-				-- },
+				tinymist = {
+					settings = {
+						formatterMode = 'typstyle',
+						exportPdf = 'onType',
+						semanticTokens = 'disable',
+					},
+				},
+				rubocop = {},
+				ruby_lsp = {},
+				zls = {},
 			}
 
 			require('mason').setup()
@@ -157,21 +161,6 @@ return {
 
 			-- mason lsp does it already
 			vim.lsp.enable(vim.tbl_keys(servers))
-
-			-- require('mason-lspconfig').setup({
-			-- 	ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-			-- 	automatic_installation = false,
-			-- 	handlers = {
-			-- 		function(server_name)
-			-- 			local server = servers[server_name] or {}
-			-- 			-- This handles overriding only values explicitly passed
-			-- 			-- by the server configuration above. Useful when disabling
-			-- 			-- certain features of an LSP (for example, turning off formatting for ts_ls)
-			-- 			server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-			-- 			require('lspconfig')[server_name].setup(server)
-			-- 		end,
-			-- 	},
-			-- })
 		end,
 	},
 }

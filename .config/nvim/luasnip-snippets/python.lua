@@ -41,6 +41,26 @@ local function create_log_snippet(level)
 end
 
 return {
+
+	s('pl', {
+		t({ 'import polars as pl', '' }),
+		i(0),
+	}),
+	s('pd', {
+		t({ 'import pandas as pd', '' }),
+		i(0),
+	}),
+	s('csv', {
+		t({ 'df = pd.read_csv("' }),
+		i(0),
+		t({ '")' }),
+	}),
+	s('co', {
+		t('pl.col('),
+		i(1),
+		t(')'),
+		i(0),
+	}),
 	s('pr', {
 		t('print('),
 		i(1),
@@ -52,6 +72,15 @@ return {
 		i(1),
 		t('):'),
 		i(0),
+	}),
+	s('ty', {
+		t('# ty: ignore['),
+		i(1),
+		t(']'),
+	}),
+	s('tyi', {
+		t('# type: ignore'),
+		i(1),
 	}),
 
 	-- Using treesitter, should look if the function is async, if yes, should add await and use ainfo instead of info

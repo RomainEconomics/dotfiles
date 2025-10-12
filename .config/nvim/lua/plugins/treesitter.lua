@@ -2,7 +2,7 @@ return { -- Highlight, edit, and navigate code
 	'nvim-treesitter/nvim-treesitter',
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
-		{ 'nushell/tree-sitter-nu' },
+		'nushell/tree-sitter-nu',
 	},
 	build = ':TSUpdate',
 	event = { 'BufRead', 'BufNewFile' },
@@ -27,12 +27,14 @@ return { -- Highlight, edit, and navigate code
 			'typescript',
 			'tsx',
 			'typst',
+			'ruby',
 			'yaml',
 			'dockerfile',
 			'vim',
 			'vimdoc',
 			'python',
 			'go',
+			'zig',
 		},
 		auto_install = true,
 		highlight = {

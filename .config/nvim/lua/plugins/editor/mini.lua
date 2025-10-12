@@ -22,13 +22,13 @@ return { -- Collection of various small independent plugins/modules
 		-- - sr)'  - [S]urround [R]eplace [)] [']
 		require('mini.surround').setup({
 			mappings = {
-				add = 'ca', -- Add surrounding in Normal and Visual modes
-				delete = 'cd', -- Delete surrounding
-				replace = 'cr', -- Replace surrounding
-				-- find = 'cf', -- Find surrounding (to the right)
-				-- find_left = 'cF', -- Find surrounding (to the left)
-				-- highlight = 'mh', -- Highlight surrounding
-				-- update_n_lines = 'mn', -- Update `n_lines`
+				add = 'na', -- Add surrounding in Normal and Visual modes
+				delete = 'nd', -- Delete surrounding
+				replace = 'nr', -- Replace surrounding
+				find = 'nf', -- Find surrounding (to the right)
+				find_left = 'nF', -- Find surrounding (to the left)
+				highlight = 'nh', -- Highlight surrounding
+				-- update_n_lines = 'nn', -- Update `n_lines`
 			},
 		})
 
@@ -67,8 +67,5 @@ return { -- Collection of various small independent plugins/modules
 		-- gm: multiply
 		-- gs: sort
 		-- g=: evaluate
-
-		-- ... and there is more!
-		--  Check out: https://github.com/echasnovski/mini.nvim
 	end,
 }

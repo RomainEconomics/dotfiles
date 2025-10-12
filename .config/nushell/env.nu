@@ -90,8 +90,10 @@ starship init nu | save -f ~/.cache/starship/init.nu
 zoxide init nushell | save -f ~/.zoxide.nu
 
 $env.ZK_SHELL = "/bin/zsh"
+$env.EDITOR = "nvim"
 
 # pnpm
 $env.PNPM_HOME = "/home/rjouhameau/.local/share/pnpm"
 $env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
 # pnpm end
+

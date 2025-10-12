@@ -63,7 +63,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_user_command('WatchRun', function()
 	local overseer = require('overseer')
 	overseer.run_template({ name = 'run script' }, function(task)
-		print('run script task', task)
 		if task then
 			task:add_component({ 'restart_on_save', paths = { vim.fn.expand('%:p') } })
 			local main_win = vim.api.nvim_get_current_win()
@@ -74,3 +73,8 @@ vim.api.nvim_create_user_command('WatchRun', function()
 		end
 	end)
 end, {})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'c',
+	callback = function() vim.keymap.set('n', '<leader>cx', ':w<CR>:!gcc % -o %:r && %:r<CR>') end,
+})
