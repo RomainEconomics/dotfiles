@@ -9,6 +9,7 @@ return {
 			require('nvim-python-repl').setup({
 				execute_on_send = true,
 				vsplit = true,
+				split_dir = 'right',
 			})
 
 			vim.keymap.set(

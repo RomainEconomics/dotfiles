@@ -226,3 +226,5 @@ keymap('n', '<leader>hp', pdf_to_text, { desc = 'Convert PDF to text and append 
 
 keymap('n', '<leader>gws', function() Snacks.picker.worktrees() end)
 keymap('n', '<leader>gwn', function() Snacks.picker.worktrees_new() end)
+
+keymap('n', '<leader>go', function() require('mini.diff').toggle_overlay(0) end)

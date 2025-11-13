@@ -10,6 +10,12 @@ return {
 		rename = { enabled = true },
 		gitbrowse = { enabled = true },
 		image = { enabled = true },
+		terminal = {
+			enabled = true,
+			win = {
+				border = 'rounded',
+			},
+		},
 		picker = {
 			enabled = true,
 			win = {

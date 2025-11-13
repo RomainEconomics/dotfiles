@@ -68,3 +68,5 @@ eval "$(starship init zsh)"
 # bun completions
 [ -s "/home/rjouhameau/.bun/_bun" ] && source "/home/rjouhameau/.bun/_bun"
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

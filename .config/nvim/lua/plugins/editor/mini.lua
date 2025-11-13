@@ -67,5 +67,16 @@ return { -- Collection of various small independent plugins/modules
 		-- gm: multiply
 		-- gs: sort
 		-- g=: evaluate
+
+		require('mini.diff').setup({
+			view = {
+				style = 'sign',
+				signs = {
+					add = '▎',
+					change = '▎',
+					delete = '',
+				},
+			},
+		})
 	end,
 }

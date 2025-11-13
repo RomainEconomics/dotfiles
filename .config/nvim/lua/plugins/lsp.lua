@@ -53,8 +53,9 @@ return {
 					-- map('<leader>DD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 					-- map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
 					-- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+					map('gdv', ':vsplit | lua vim.lsp.buf.definition()<CR>', '[G]oto [D]efinition (VSplit)')
 
-					map('<C-k>', vim.lsp.buf.hover, 'Hover into', 'n') -- HACK: was using <C-i> but bad idea, map to tab actually
+					map('<C-m>', vim.lsp.buf.hover, 'Hover into', 'n') -- HACK: was using <C-i> but bad idea, map to tab actually
 
 					-- Rename the variable under your cursor.
 					map('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -119,6 +120,15 @@ return {
 				taplo = {},
 				gopls = {},
 				pyright = {},
+				-- basedpyright = {
+				-- 	settings = {
+				-- 		analysis = {
+				-- 			autoSearchPaths = true,
+				-- 			diagnosticMode = 'openFilesOnly',
+				-- 			useLibraryCodeForTypes = true,
+				-- 		},
+				-- 	},
+				-- },
 				-- ty = {},
 				ruff = {},
 				tailwindcss = {},
@@ -126,6 +136,7 @@ return {
 				lua_ls = {
 					settings = {
 						Lua = {
+							hint = { enable = true },
 							completion = {
 								callSnippet = 'Replace',
 							},
@@ -143,6 +154,11 @@ return {
 				rubocop = {},
 				ruby_lsp = {},
 				zls = {},
+				jdtls = {
+					settings = {
+						java = {},
+					},
+				},
 			}
 
 			require('mason').setup()
