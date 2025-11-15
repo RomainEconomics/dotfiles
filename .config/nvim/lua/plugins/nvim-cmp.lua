@@ -107,6 +107,11 @@ return {
 		-- (Default) Only show the documentation popup when manually triggered
 		completion = {
 			documentation = { auto_show = true, auto_show_delay_ms = 100 },
+			accept = {
+				auto_brackets = {
+					enabled = true,
+				},
+			},
 		},
 
 		-- Default list of enabled providers defined so that you can extend it
