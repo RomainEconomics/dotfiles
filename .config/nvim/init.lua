@@ -6,7 +6,6 @@ vim.g.have_nerd_font = true
 require('options')
 require('keymaps')
 require('autocommands')
-require('lsp')
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
